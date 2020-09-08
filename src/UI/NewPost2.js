@@ -31,10 +31,6 @@ export class NewPost2 extends Component{
                             </div>
 
                     <div className="card-footer row justify-content-between" style={{'padding':'15px 10%'}}>
-                                <div>
-                                    <img src={user}
-                                          style={{"width": '30px', 'height': '30px', 'borderRadius': '50%'}} alt=".."/>
-                                </div>
                              <div>
                                 {/*<a href="#" className="text-muted">{this.props.thePost.author ?this.props.thePost.author : this.props.thePost.source.name}</a>*/}
                                 <a href="#" className="text-muted">{this.props.thePost.source.name.split('.com')}</a>

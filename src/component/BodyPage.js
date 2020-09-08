@@ -13,8 +13,8 @@ export class BodyPage extends Component {
     }
     componentDidMount(){
             // axios.get("http://newsapi.org/v2/top-headlines?country=gb&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
-            // axios.get("http://newsapi.org/v2/top-headlines?country=eg&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
-            axios.get("http://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+            axios.get("http://newsapi.org/v2/top-headlines?country=eg&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+            // axios.get("http://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
             // axios.get("http://newsapi.org/v2/top-headlines?country=au&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
                 .then(res =>{
                         this.setState({

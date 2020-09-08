@@ -7,13 +7,13 @@ import {NavLink} from "react-router-dom";
 export class PostDetails extends Component {
 
     goToUserArticels = (name) =>{
-        console.log(name)
-        // console.log(this.props)
-        // this.props.history.push({ pathname: '/userArticle',data: [{id:'hi'}] })
+        this.props.history.push({ pathname: '/userArticle',userName: name})
 
     }
     componentDidMount() {
-        console.log(this.props.location.post)
+        localStorage.setItem("post",this.props.location.post)
+        // console.log(this.props.location.post)
+        // console.log(localStorage.getItem("post"))
     }
 
     render() {
@@ -25,12 +25,7 @@ export class PostDetails extends Component {
                 <h1>{this.props.location.post.title}</h1>
                 <hr/>
 
-                <div className="row" style={{backgroundColor:"",padding:'0px 6%'}}>
-                    <img src={user} style={{
-                        "width":'50px',
-                        "height":'50px',
-                        "borderRadius":'50%'
-                    }}/>
+                <div className="row" style={{backgroundColor:"",padding:'0px'}}>
                     <p style={{
                         margin: 'auto 10px',
                         fontFamily:'Toke',
@@ -88,15 +83,14 @@ export class PostDetails extends Component {
                             fontFamily:'Toke',
                             fontWeight:'bolder',
                             fontSize:'30px'
-                        }}> AbdElrahman Nasr</p>
+                        }}> {this.props.location.post.author ? this.props.location.post.author :this.props.location.post.source.name.split('.com') }</p>
 
                         <p style={{
                             fontFamily:'Toke',
                             fontWeight:'bold',
                         }}>Deep thinker. Like talking about the world,
-                            religion and politics. I love playing tennis,
-                            running and watching cat videos. Coffee is my friend.</p>
-                        <button className="btn btn-primary" onClick={()=>this.goToUserArticels("Abdo")}>View All Artical</button>
+                            religion and politics.</p>
+                        <button className="btn btn-primary" onClick={()=>this.goToUserArticels(this.props.location.post.source.name.split('.com'))}>View All Artical</button>
                     </section>
 
 

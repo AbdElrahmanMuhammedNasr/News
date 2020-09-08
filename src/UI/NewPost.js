@@ -31,8 +31,6 @@ export class NewPost extends Component{
                             <h5 className="card-title" style={{'fontFamily':'Teko'}}>{this.props.thePost.title}</h5>
                             <p className="card-text"><small className="text-muted">Published {this.props.thePost.publishedAt}</small></p>
                             <div className="card-footer row justify-content-between">
-                                <div><img src={news}
-                                          style={{"width": '30px', 'height': '30px', 'borderRadius': '50%'}} alt=".."/></div>
                                 <a href="#" className="text-muted">{this.props.thePost.source.name.split('.com')}</a>
                             </div>
                         </div>
