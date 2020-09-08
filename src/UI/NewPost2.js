@@ -1,34 +1,45 @@
 import React, {Component} from "react";
 import news from '../asset/news.jpg';
+import user from '../asset/abdo.jpg';
+import {NavLink} from "react-router-dom";
 
 export class NewPost2 extends Component{
     render() {
+        // console.log(this.props.thePost)
+
         return (
             <div className="card mb-3"
                  style={{'maxWidth': '540px',
                      'maxHeight': '100vh',
                      'overflow': 'hidden',
-                     'cursor': 'pointer',
                      'boxShadow':'0px 0px 10px gray'
                  }}>
 
                     <div className="card">
-                        <img src={news} className="card-img-top" alt="..." style={{
-                            'height':'45vh'
-                        }}/>
+                        <NavLink to={{
+                            pathname:'/postDetails',
+                            post:this.props.thePost
+                        }}>
+                            <img src={this.props.thePost.urlToImage} className="card-img-top" alt="..." style={{
+                                'height':'45vh',
+                                'cursor': 'pointer',
+                            }}/>
+                        </NavLink>
                             <div className="card-body">
-                                <h5 className="card-title" style={{'fontFamily':'Teko'}}>Card title</h5>
-                                <p className="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small>
-                                </p>
+                                <h5 className="card-title" style={{'fontFamily':'Teko'}}>{this.props.thePost.title}</h5>
+                                <p className="card-text"><small className="text-muted">Published at: {this.props.thePost.publishedAt.replace('T',' ')}</small></p>
                             </div>
 
                     <div className="card-footer row justify-content-between" style={{'padding':'15px 10%'}}>
-                                <div><img src={news}
-                                          style={{"width": '30px', 'height': '30px', 'borderRadius': '50%'}}/></div>
-                                <div><a href="#" className="text-muted">Tamer Ali</a></div>
-                            </div>
+                                <div>
+                                    <img src={user}
+                                          style={{"width": '30px', 'height': '30px', 'borderRadius': '50%'}} alt=".."/>
+                                </div>
+                             <div>
+                                {/*<a href="#" className="text-muted">{this.props.thePost.author ?this.props.thePost.author : this.props.thePost.source.name}</a>*/}
+                                <a href="#" className="text-muted">{this.props.thePost.source.name.split('.com')}</a>
+                             </div>
+                    </div>
                         </div>
 
 

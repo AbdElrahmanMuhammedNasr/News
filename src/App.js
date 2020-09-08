@@ -1,11 +1,14 @@
 import React from 'react';
 import './App.css';
 import Container from "./Container/Container";
+import {BrowserRouter} from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Container />
+        <BrowserRouter>
+          <Container />
+        </BrowserRouter>
     </div>
   );
 }

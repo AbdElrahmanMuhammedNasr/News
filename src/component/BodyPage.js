@@ -1,12 +1,27 @@
 import React, {Component} from "react";
 import NewPost from "../UI/NewPost";
 import NewPost2 from "../UI/NewPost2";
+import Category from "./category";
+import Welcome from "./welcome";
+import axios from 'axios';
 
 
 export class BodyPage extends Component {
     state ={
         vertical: true,
-        news :[1,2,3,4,5,6,7,8,9,10,11,12,13,14,55,885,60,95,50,200]
+        news :[]
+    }
+    componentDidMount(){
+            // axios.get("http://newsapi.org/v2/top-headlines?country=gb&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+            // axios.get("http://newsapi.org/v2/top-headlines?country=eg&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+            axios.get("http://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+            // axios.get("http://newsapi.org/v2/top-headlines?country=au&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+                .then(res =>{
+                        this.setState({
+                            news :res.data["articles"]
+                        })
+                })
+                .catch(e=> console.log(e))
     }
     toggleView =()=>{
         this.setState({
@@ -16,7 +31,11 @@ export class BodyPage extends Component {
     }
     render (){
         return (
+            <div>
+                <Welcome />
+                <Category />
             <div className="" style={{"width":'90%', "margin":'auto'}}>
+
                 <span
                     onClick={this.toggleView}
                     className= { this.state.vertical ? "fa  fa-toggle-off d-flex justify-content-end" :"fa  fa-toggle-on d-flex justify-content-end"}
@@ -41,6 +60,7 @@ export class BodyPage extends Component {
                     }
                 </div>
 
+            </div>
             </div>
 
 
