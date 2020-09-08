@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
 
 export class NewPost2 extends Component{
+
     render() {
-        // console.log(this.props.thePost)
 
         return (
             <div className="card mb-3"
@@ -19,7 +19,7 @@ export class NewPost2 extends Component{
                             post:this.props.thePost
                         }}>
 
-                            <img src={this.props.thePost.urlToImage} className="card-img-top" alt="..."style={{'height': '45vh', 'cursor': 'pointer',}}/>
+                            <img src={this.props.thePost['urlToImage']} className="card-img-top" alt="..."style={{'height': '45vh', 'cursor': 'pointer',}}/>
 
                         </NavLink>
                             <div className="card-body">
