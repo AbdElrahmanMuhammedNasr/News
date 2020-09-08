@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import news from '../asset/news.jpg'
 import {NavLink} from "react-router-dom";
 
 

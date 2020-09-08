@@ -1,8 +1,8 @@
 import React from 'react';
 import {Component} from "react";
 import user from '../asset/abdo.jpg';
-import news from '../asset/news.jpg'
 import {NavLink} from "react-router-dom";
+import {connect} from 'react-redux';
 
 export class PostDetails extends Component {
 
@@ -19,7 +19,7 @@ export class PostDetails extends Component {
     render() {
         return (
             <div className="" style={{'width':'60%','margin':'auto','backgroundColor':' ','padding':'2%'}}>
-                <p style={{'fontFamily':'Toke',fontWeight:'bolder',display:'inline',borderBottom:'3px solid gray'}}>Health</p>
+                <p style={{'fontFamily':'Toke',fontWeight:'bolder',display:'inline',borderBottom:'3px solid gray'}}>{this.props.theCategory}</p>
                 <hr/>
 
                 <h1>{this.props.location.post.title}</h1>
@@ -41,7 +41,7 @@ export class PostDetails extends Component {
                 <hr/>
 
                 <div>
-                    <img src={this.props.location.post.urlToImage} style={{width:'100%',height:'80vh',borderRadius:'10px'}}/>
+                    <img src={this.props.location.post.urlToImage} style={{width:'100%',height:'80vh',borderRadius:'10px'}} alt=".."/>
                 </div>
                 <div style={{marginTop:'30px'}}>
                     <h5 style={{
@@ -63,9 +63,7 @@ export class PostDetails extends Component {
                 <h5>TAGGED AS</h5>
 
                 <div className="d-flex">
-                    <div className="p-2"><NavLink className="btn btn-secondary" to={{}} >Life</NavLink> </div>
-                    <div className="p-2"><NavLink className="btn btn-secondary" to={{}}>Health</NavLink></div>
-                    <div className="p-2"><NavLink className="btn btn-secondary" to={{}}>Gym</NavLink></div>
+                    <div className="p-2"><NavLink className="btn btn-secondary" to={{}} >{this.props.theCategory}</NavLink> </div>
                 </div>
                 <br/><br/><br/><br/><br/>
 
@@ -74,7 +72,7 @@ export class PostDetails extends Component {
                         "width":'150px',
                         "height":'150px',
                         "borderRadius":'50%'
-                    }}/>
+                    }} alt=".."/>
                     <section style={{width:'50%'}} className="offset-1">
                         <p style={{
                             fontFamily:'Toke',
@@ -100,4 +98,9 @@ export class PostDetails extends Component {
     }
 
 }
-export default PostDetails;
+const reducerToMap = state =>{
+    return {
+       theCategory: state.category
+    };
+}
+export default connect(reducerToMap) (PostDetails);

@@ -1,14 +1,14 @@
 import {Component} from "react";
 import React from "react";
-import news from "../asset/news.jpg";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {connect} from 'react-redux';
 export class AllUserArtical extends Component {
         state ={
             userPost :[]
         }
         componentDidMount() {
-            axios.get("http://newsapi.org/v2/top-headlines?country=eg&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+            axios.get(this.props.theUrl)
                 .then(res =>{
                     const newData = res.data["articles"]
                     const filterData = [];
@@ -44,8 +44,7 @@ export class AllUserArtical extends Component {
 
                                 </div>
                                 <br/>
-                                <p style={{'fontFamily':'Toke',fontWeight:'bolder',display:'inline',borderBottom:'3px solid gray'}}>Health</p>
-                                <br/> <br/>
+                                <br/>
                                 <h5 style={{width:'60%'}}>
                                     {e.title}
                                 </h5>
@@ -63,4 +62,9 @@ export class AllUserArtical extends Component {
             );
         }
 }
-export default  AllUserArtical;
+const  reducerToMap = state =>{
+    return {
+        theUrl:state.url
+    };
+}
+export default connect(reducerToMap)  (AllUserArtical);

@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import news from '../asset/news.jpg';
-import user from '../asset/abdo.jpg';
 import {NavLink} from "react-router-dom";
 
 export class NewPost2 extends Component{
@@ -20,10 +18,9 @@ export class NewPost2 extends Component{
                             pathname:'/postDetails',
                             post:this.props.thePost
                         }}>
-                            <img src={this.props.thePost.urlToImage} className="card-img-top" alt="..." style={{
-                                'height':'45vh',
-                                'cursor': 'pointer',
-                            }}/>
+
+                            <img src={this.props.thePost.urlToImage} className="card-img-top" alt="..."style={{'height': '45vh', 'cursor': 'pointer',}}/>
+
                         </NavLink>
                             <div className="card-body">
                                 <h5 className="card-title" style={{'fontFamily':'Teko'}}>{this.props.thePost.title}</h5>

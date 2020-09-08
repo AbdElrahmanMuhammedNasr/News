@@ -1,7 +1,18 @@
 import React, {Component} from "react";
 import {NavLink} from "react-router-dom";
+import {connect} from "react-redux";
 
 export class Haver extends Component {
+    state ={
+        search :'',
+    }
+    changeSearch = (event)=>{
+        this.setState({
+            ...this.state,
+            search : event.target.value
+        })
+    }
+
     render() {
         return (
             <div className="" style={{
@@ -11,8 +22,8 @@ export class Haver extends Component {
                 <nav className="navbar navbar-expand-lg navbar-light row justify-content-between">
                     <NavLink className="navbar-brand" to={{pathname:'/'}} style={{'fontFamily':'Teko'}}>World NEWS</NavLink>
                     <div className="row justify-content-around" style={{"width":'60%'}}>
-                        <input  className="form-control  w-75" placeholder="Search..."/>
-                        <button className=" btn btn-primary">Search</button>
+                        <input  className="form-control  w-75" placeholder="Search..." onChange={(event)=>this.changeSearch(event)} value={this.state.search}/>
+                        <button className=" btn btn-primary" onClick={()=> this.props.searchCountry (this.state.search)}>Search</button>
                     </div>
                     <a className="navbar-brand" href="www.facebook.com" style={{'fontFamily':'Teko'}}>
                         <span className="fa fa-user-circle-o"></span>
@@ -23,5 +34,10 @@ export class Haver extends Component {
     }
 
 }
-export default Haver;
+const searchForReducer = dispatch =>{
+    return {
+        searchCountry : (key)=> dispatch({type:'SEARCH',val:key}),
+    };
+}
+export default connect(null,searchForReducer) (Haver);
 

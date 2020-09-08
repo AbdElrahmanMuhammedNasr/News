@@ -4,6 +4,8 @@ import NewPost2 from "../UI/NewPost2";
 import Category from "./category";
 import Welcome from "./welcome";
 import axios from 'axios';
+import {connect} from 'react-redux';
+import Loading from "./loading";
 
 
 export class BodyPage extends Component {
@@ -12,10 +14,8 @@ export class BodyPage extends Component {
         news :[]
     }
     componentDidMount(){
-            // axios.get("http://newsapi.org/v2/top-headlines?country=gb&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
-            axios.get("http://newsapi.org/v2/top-headlines?country=eg&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
-            // axios.get("http://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
-            // axios.get("http://newsapi.org/v2/top-headlines?country=au&apiKey=69ebdeb9f7ce4f3eb2a2a925a4392ab8")
+        this.state.news = [];
+        axios.get(this.props.theUrl)
                 .then(res =>{
                         this.setState({
                             news :res.data["articles"]
@@ -23,6 +23,17 @@ export class BodyPage extends Component {
                 })
                 .catch(e=> console.log(e))
     }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        this.state.news = [];
+        axios.get(this.props.theUrl)
+            .then(res =>{
+                this.setState({
+                    news :res.data["articles"]
+                })
+            })
+            .catch(e=> console.log(e))
+    }
+
     toggleView =()=>{
         this.setState({
             ...this.state,
@@ -49,11 +60,13 @@ export class BodyPage extends Component {
                 <br/>
                 <div className=" row justify-content-between">
                     {
+
+                        this.state.news.length < 0 ? <Loading />  :
                         this.state.news.map(e=>{
                             return (
                                 this.state.vertical
-                                    ?<NewPost2 key={{e}} thePost={e} />
-                                    :<NewPost key={{e}} thePost={e} />
+                                    ?<NewPost2 key={Math.random()} thePost={e}  />
+                                    :<NewPost key={Math.random()} thePost={e} />
 
                             );
                         })
@@ -67,4 +80,9 @@ export class BodyPage extends Component {
         );
     }
 }
-export default BodyPage;
+const mapStateToProps = state =>{
+    return {
+        theUrl : state.url,
+    };
+}
+export default connect(mapStateToProps) (BodyPage);
